@@ -1,0 +1,60 @@
+
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name api.main.ingmaster.com.co;
+
+    ssl_certificate /etc/letsencrypt/live/api.main.ingmaster.com.co/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.main.ingmaster.com.co/privkey.pem;
+    include /etc/nginx/conf.d/ssl_params.conf;
+
+    location / {
+        proxy_pass http://api_main:80;
+        include /etc/nginx/proxy_params.conf;
+    }
+}
+
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name api.socket.ingmaster.com.co;
+
+    ssl_certificate /etc/letsencrypt/live/api.socket.ingmaster.com.co/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.socket.ingmaster.com.co/privkey.pem;
+    include /etc/nginx/conf.d/ssl_params.conf;
+
+    location / {
+        proxy_pass http://api_socket:80;
+        include /etc/nginx/proxy_params.conf;
+    }
+}
+
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name pgadmin.ingmaster.com.co;
+
+    ssl_certificate /etc/letsencrypt/live/pgadmin.ingmaster.com.co/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/pgadmin.ingmaster.com.co/privkey.pem;
+    include /etc/nginx/conf.d/ssl_params.conf;
+
+    location / {
+        proxy_pass http://pgadmin:80;
+        include /etc/nginx/proxy_params.conf;
+    }
+}
+
+server {
+    listen 443 ssl;
+    http2 on;
+    server_name evo.ingmaster.com.co;
+
+    ssl_certificate /etc/letsencrypt/live/evo.ingmaster.com.co/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/evo.ingmaster.com.co/privkey.pem;
+    include /etc/nginx/conf.d/ssl_params.conf;
+
+    location / {
+        proxy_pass http://evolution_api:8080;
+        include /etc/nginx/proxy_params.conf;
+    }
+}

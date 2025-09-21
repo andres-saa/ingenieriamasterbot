@@ -1,0 +1,24 @@
+{
+  "project": "Ing_bot",
+  "domain": "ingmaster.com.co",
+  "email": "andrew19f@gmail.com",
+  "staging": false,
+  "use_pg": true,
+  "use_mongo": false,
+  "use_redis": true,
+  "use_evo": true,
+  "evo": {
+    "enabled": true,
+    "api_key": "EAAZALYTBuTP4BO3wEwkctBmh6KO47smx5r29UkyFTQ6avy7YwaX9Y0fQHrlQSw7HcXzhIzlnFZBZBmUpgjBsDVr2Slu4BE8JKTu0v2UwO48d1CMXbIHTUy9yFlyLHHq6MnBjFL0J25iZCiosV0BSeSZC2DBYHem3CWwPKxtDAnPCtNdnzBWSAHUdtGDtUEcRFbAZDZD",
+    "webhook_backend": "main",
+    "webhook_path": "/webhook",
+    "host_label": "evo",
+    "dev_webhook_url": "http://localhost:8000/webhook",
+    "prod_webhook_url": "https://api.main.ingmaster.com.co/webhook"
+  },
+  "backs": [
+    "main",
+    "socket"
+  ],
+  "fronts": []
+}

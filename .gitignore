@@ -1,0 +1,8 @@
+db/pgadmin/*
+!db/pgadmin/servers.json
+nginx/letsencrypt/*
+node_modules/
+__pycache__/
+.venv/
+.env
+evolution/*.log

@@ -1,0 +1,86 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:16-alpine
+    env_file: ./db/.env
+    environment:
+      - TZ=America/Bogota
+    volumes:
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+      - pg_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4:8.10
+    env_file: ./db/.env
+    environment:
+      - PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=True
+      - PGADMIN_CONFIG_LOGIN_BANNER='"Bienvenido a pgAdmin"'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./db/pgadmin/servers.json:/pgadmin4/servers.json:ro
+    depends_on: [postgres]
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    env_file: ./db/.env
+    command: ['redis-server','--appendonly','yes','--requirepass','${REDIS_PASSWORD}']
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+  api_main:
+    build: { context: ./backend/main, target: prod }
+    container_name: api_main
+    env_file: ./backend/main/.env
+    depends_on: [postgres, redis]
+    restart: unless-stopped
+
+  api_socket:
+    build: { context: ./backend/socket, target: prod }
+    container_name: api_socket
+    env_file: ./backend/socket/.env
+    depends_on: [postgres, redis]
+    command: ["gunicorn","-k","uvicorn.workers.UvicornWorker","-w","1","-t","1","-b","0.0.0.0:80","main:app"]
+    restart: unless-stopped
+
+  evolution_api:
+    image: atendai/evolution-api:v2.1.1
+    container_name: evolution_api
+    env_file: ./evolution/.env
+    environment:
+      - WEBHOOK_GLOBAL_URL=${WEBHOOK_GLOBAL_URL_PROD}
+    volumes:
+      - evolution_data:/evolution/store
+    depends_on: [postgres, redis]
+    restart: unless-stopped
+
+  proxy:
+    build: { context: ./nginx }
+    container_name: proxy
+    ports: [ '80:80', '443:443' ]
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:rw
+      - ./nginx/proxy_params.conf:/etc/nginx/proxy_params.conf:ro
+      - ./nginx/certbot/www:/var/www/certbot:ro
+      - ./nginx/letsencrypt:/etc/letsencrypt:ro
+    depends_on: [postgres, pgadmin, redis, api_main, api_socket, evolution_api]
+    restart: unless-stopped
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: certbot
+    volumes:
+      - ./nginx/certbot/www:/var/www/certbot
+      - ./nginx/letsencrypt:/etc/letsencrypt
+    depends_on: [proxy]
+    entrypoint: sh
+    command: -c "if [ -n 'api.main.ingmaster.com.co api.socket.ingmaster.com.co evo.ingmaster.com.co pgadmin.ingmaster.com.co' ]; then for d in api.main.ingmaster.com.co api.socket.ingmaster.com.co evo.ingmaster.com.co pgadmin.ingmaster.com.co; do certbot certonly -n --keep-until-expiring --webroot -w /var/www/certbot -d $$d --email \"andrew19f@gmail.com\" --agree-tos --no-eff-email ; done; fi; trap exit TERM; while :; do certbot renew -n --webroot -w /var/www/certbot --quiet || true; sleep 12h; done"
+    restart: unless-stopped
+
+volumes:
+  evolution_data:
+  pg_data:
+  pgadmin_data:
+  redis_data:
