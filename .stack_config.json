@@ -1,6 +1,6 @@
 {
   "project": "Ing_bot",
-  "domain": "ingmaster.com.co",
+  "domain": "arhook",
   "email": "andrew19f@gmail.com",
   "staging": false,
   "use_pg": true,
@@ -14,7 +14,7 @@
     "webhook_path": "/webhook",
     "host_label": "evo",
     "dev_webhook_url": "http://localhost:8000/webhook",
-    "prod_webhook_url": "https://api.main.ingmaster.com.co/webhook"
+    "prod_webhook_url": "https://api.main.arhook/webhook"
   },
   "backs": [
     "main",

@@ -76,7 +76,7 @@ services:
       - ./nginx/letsencrypt:/etc/letsencrypt
     depends_on: [proxy]
     entrypoint: sh
-    command: -c "if [ -n 'api.main.ingmaster.com.co api.socket.ingmaster.com.co evo.ingmaster.com.co pgadmin.ingmaster.com.co' ]; then for d in api.main.ingmaster.com.co api.socket.ingmaster.com.co evo.ingmaster.com.co pgadmin.ingmaster.com.co; do certbot certonly -n --keep-until-expiring --webroot -w /var/www/certbot -d $$d --email \"andrew19f@gmail.com\" --agree-tos --no-eff-email ; done; fi; trap exit TERM; while :; do certbot renew -n --webroot -w /var/www/certbot --quiet || true; sleep 12h; done"
+    command: -c "if [ -n 'api.main.arhook api.socket.arhook evo.arhook pgadmin.arhook' ]; then for d in api.main.arhook api.socket.arhook evo.arhook pgadmin.arhook; do certbot certonly -n --keep-until-expiring --webroot -w /var/www/certbot -d $$d --email \"andrew19f@gmail.com\" --agree-tos --no-eff-email ; done; fi; trap exit TERM; while :; do certbot renew -n --webroot -w /var/www/certbot --quiet || true; sleep 12h; done"
     restart: unless-stopped
 
 volumes:

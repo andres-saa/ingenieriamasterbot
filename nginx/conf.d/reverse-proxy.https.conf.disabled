@@ -2,10 +2,10 @@
 server {
     listen 443 ssl;
     http2 on;
-    server_name api.main.ingmaster.com.co;
+    server_name api.main.arhook;
 
-    ssl_certificate /etc/letsencrypt/live/api.main.ingmaster.com.co/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/api.main.ingmaster.com.co/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/api.main.arhook/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.main.arhook/privkey.pem;
     include /etc/nginx/conf.d/ssl_params.conf;
 
     location / {
@@ -17,10 +17,10 @@ server {
 server {
     listen 443 ssl;
     http2 on;
-    server_name api.socket.ingmaster.com.co;
+    server_name api.socket.arhook;
 
-    ssl_certificate /etc/letsencrypt/live/api.socket.ingmaster.com.co/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/api.socket.ingmaster.com.co/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/api.socket.arhook/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.socket.arhook/privkey.pem;
     include /etc/nginx/conf.d/ssl_params.conf;
 
     location / {
@@ -32,10 +32,10 @@ server {
 server {
     listen 443 ssl;
     http2 on;
-    server_name pgadmin.ingmaster.com.co;
+    server_name pgadmin.arhook;
 
-    ssl_certificate /etc/letsencrypt/live/pgadmin.ingmaster.com.co/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/pgadmin.ingmaster.com.co/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/pgadmin.arhook/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/pgadmin.arhook/privkey.pem;
     include /etc/nginx/conf.d/ssl_params.conf;
 
     location / {
@@ -47,10 +47,10 @@ server {
 server {
     listen 443 ssl;
     http2 on;
-    server_name evo.ingmaster.com.co;
+    server_name evo.arhook;
 
-    ssl_certificate /etc/letsencrypt/live/evo.ingmaster.com.co/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/evo.ingmaster.com.co/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/evo.arhook/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/evo.arhook/privkey.pem;
     include /etc/nginx/conf.d/ssl_params.conf;
 
     location / {
