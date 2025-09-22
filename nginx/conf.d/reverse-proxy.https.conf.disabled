@@ -2,10 +2,10 @@
 server {
     listen 443 ssl;
     http2 on;
-    server_name api.main.arhook;
+    server_name api.main.arhook.com;
 
-    ssl_certificate /etc/letsencrypt/live/api.main.arhook/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/api.main.arhook/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/api.main.arhook.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.main.arhook.com/privkey.pem;
     include /etc/nginx/conf.d/ssl_params.conf;
 
     location / {
@@ -17,10 +17,10 @@ server {
 server {
     listen 443 ssl;
     http2 on;
-    server_name api.socket.arhook;
+    server_name api.socket.arhook.com;
 
-    ssl_certificate /etc/letsencrypt/live/api.socket.arhook/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/api.socket.arhook/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/api.socket.arhook.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/api.socket.arhook.com/privkey.pem;
     include /etc/nginx/conf.d/ssl_params.conf;
 
     location / {
@@ -32,10 +32,10 @@ server {
 server {
     listen 443 ssl;
     http2 on;
-    server_name pgadmin.arhook;
+    server_name pgadmin.arhook.com;
 
-    ssl_certificate /etc/letsencrypt/live/pgadmin.arhook/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/pgadmin.arhook/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/pgadmin.arhook.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/pgadmin.arhook.com/privkey.pem;
     include /etc/nginx/conf.d/ssl_params.conf;
 
     location / {
@@ -47,10 +47,10 @@ server {
 server {
     listen 443 ssl;
     http2 on;
-    server_name evo.arhook;
+    server_name evo.arhook.com;
 
-    ssl_certificate /etc/letsencrypt/live/evo.arhook/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/evo.arhook/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/evo.arhook.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/evo.arhook.com/privkey.pem;
     include /etc/nginx/conf.d/ssl_params.conf;
 
     location / {
